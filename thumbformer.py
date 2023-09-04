@@ -62,7 +62,7 @@ class Game:
         self.map = Map()
         display.setFPS(30)
         
-        self.STATE = "game"
+        self.STATE = "gameee"
         
         while True:
             if self.STATE == "menu":
@@ -75,7 +75,7 @@ class Game:
                 self.state_broke()
         
             
-    def state_menu():
+    def state_menu(self):
         pass
             
     def state_game(self):
@@ -129,11 +129,20 @@ class Game:
         display.update()
         all_platform.clear()
         
-    def state_end():
+    def state_end(self):
         pass
     
-    def state_broke():
-        pass
+    def state_broke(self):
+            display.fill(0)
+            display.setFont("/lib/font5x7.bin", 5, 7, 1)
+            display.drawText("Something", 5, 0, 1)
+            display.drawText("went", 5, 10, 1)
+            display.drawText("wrong", 5, 20, 1)
+            
+            display.setFont("/lib/font3x5.bin", 3, 5, 1)
+            display.drawText("Please Restart", 5, 34, 1)
+            display.update()
+
     
 
 Game()
