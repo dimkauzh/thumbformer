@@ -15,4 +15,4 @@ player_5 = bytearray([63,31,25,63])
 # BITMAP: width: 4, height: 6
 player_6 = bytearray([63,31,25,63])
 # BITMAP: width: 16, height: 8
-platform_b = bytearray([0, 0, 21, 42, 21, 42, 21, 42, 21, 42, 21, 42, 21, 42, 0, 0])
+platform_b = bytearray([0,0,63,51,45,45,63,45,45,63,45,45,51,63,0,0])

@@ -57,7 +57,7 @@ class Game:
         self.map = Map()
         display.setFPS(30)
         
-        self.STATE = "menu"
+        self.STATE = "game"
         
         while True:
             if self.STATE == "menu":
@@ -98,8 +98,9 @@ class Game:
             player.xVel -= cameraSpeedX
             player.mirrorX = 0
             player.setFrame(player.getFrame() + 1)
-        else:
-            if player.getFrame() == 3 or player.getFrame() == 4:
+            
+        if not buttonR.pressed() and not buttonL.pressed():
+            if player.getFrame() <= 3:
                 player.setFrame(1)
 
         player.y -= player.yVel
