@@ -1,32 +1,27 @@
 import time
 from thumby import *
 
-# BITMAP: width: 4, height: 6
-player_1 = bytearray([63,31,25,63])
-# BITMAP: width: 4, height: 6
-player_2 = bytearray([63,31,25,63])
-# BITMAP: width: 4, height: 6
-player_3 = bytearray([31,63,57,31])
-# BITMAP: width: 4, height: 6
-player_4 = bytearray([31,63,57,31])
-# BITMAP: width: 4, height: 6
-player_5 = bytearray([63,31,25,63])
-# BITMAP: width: 4, height: 6
-player_6 = bytearray([63,31,25,63])
+import sys
+import os
+os.chdir("/Games/thumbformer/")
+
+from sprites import *
 
 player_anim = player_1 + player_2 + player_3 + player_4 + player_5 + player_6
 player_spritecount = 0
 
-platform_b = bytearray([0, 0, 21, 42, 21, 42, 21, 42, 21, 42, 21, 42, 21, 42, 0, 0])
+menu_anim = menu_1
 
 player = Sprite(4, 6, player_anim)
+menu = Sprite(72, 40, menu_anim)
+
 
 all_platform = []
 
 all_items_to_draw = [player]
 
-player.y = 30
-player.x = 62
+player.y = 26
+player.x = 39.6
 
 GRAVITY = 0.08
 JUMP_POWER = 1.2
@@ -62,7 +57,7 @@ class Game:
         self.map = Map()
         display.setFPS(30)
         
-        self.STATE = "gameee"
+        self.STATE = "menu"
         
         while True:
             if self.STATE == "menu":
@@ -76,7 +71,12 @@ class Game:
         
             
     def state_menu(self):
-        pass
+        if buttonA.justPressed():
+            self.STATE = "game"
+        
+        display.drawSprite(menu)
+        
+        display.update()
             
     def state_game(self):
         global cameraX, cameraY
@@ -113,7 +113,6 @@ class Game:
         self.map.create_platform(8, 8)
         self.map.create_platform(39, 39)
 
-        # Adjust camera coordinates to follow the player
         cameraX = player.x - display.width // 2
         cameraY = player.y - display.height // 2
 
@@ -122,9 +121,7 @@ class Game:
             plat.sprite.y -= int(cameraY)
             plat.check_collision(player)
             display.drawSprite(plat.sprite)
-
-        #player.x -= int(cameraX)
-        #player.y -= int(cameraY)
+        
         display.drawSprite(player)
         display.update()
         all_platform.clear()
@@ -142,7 +139,5 @@ class Game:
             display.setFont("/lib/font3x5.bin", 3, 5, 1)
             display.drawText("Please Restart", 5, 34, 1)
             display.update()
-
-    
 
 Game()
